@@ -1,4 +1,5 @@
 *.xlsx
 *.json
 *.pyc
+.venv
 .DS_Store
