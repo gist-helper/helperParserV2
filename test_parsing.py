@@ -3,8 +3,6 @@ import json
 
 from parsing import parse_slot
 
-from util import ComplexEncoder, sanitize_menu
-
 file_path = "./2학생회관.xlsx"
 
 workbook = openpyxl.load_workbook(file_path)
