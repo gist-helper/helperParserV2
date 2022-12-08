@@ -13,7 +13,7 @@ FIRST_DAY_BREAKFAST = '{\n    "meal": {\n        "title": "제2학생회관1층"
 LAST_DAY_DINNER = '{\n    "meal": {\n        "title": "제2학생회관1층",\n        "meal_date": "2022-10-02",\n        "kind_of_meal": "석식",\n        "menu": "흑미밥\\n순두부탕\\n동그랑땡전\\n고구마맛탕\\n양배추초무침\\n양념깻잎지\\n배추김치"\n    }\n}'
 
 
-def test_first_day_breakfast():
+def test_parsing_first_day_breakfast():
     parse_slot(sheet, 4, 0)
 
     with open("./09_26_b_kor.json") as f:
@@ -23,7 +23,7 @@ def test_first_day_breakfast():
     assert json.dumps(json_data, indent=4, ensure_ascii=False) == FIRST_DAY_BREAKFAST
 
 
-def test_last_day_dinner():
+def test_parsing_last_day_dinner():
     parse_slot(sheet, 10, 2)
 
     with open("./10_02_d_kor.json") as f:
