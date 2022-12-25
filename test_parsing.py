@@ -1,5 +1,6 @@
-import openpyxl
 import json
+
+import openpyxl
 
 from parsing import parse_slot
 
@@ -14,7 +15,7 @@ LAST_DAY_DINNER = '{\n    "meal": {\n        "title": "제2학생회관1층",\n 
 
 
 def test_parsing_first_day_breakfast():
-    parse_slot(sheet, 4, 0)
+    parse_slot(sheet, 0, 4, 0)
 
     with open("./09_26_b_kor.json") as f:
         data = f.read()
@@ -24,7 +25,7 @@ def test_parsing_first_day_breakfast():
 
 
 def test_parsing_last_day_dinner():
-    parse_slot(sheet, 10, 2)
+    parse_slot(sheet, 0, 10, 2)
 
     with open("./10_02_d_kor.json") as f:
         data = f.read()
