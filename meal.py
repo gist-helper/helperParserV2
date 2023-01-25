@@ -1,9 +1,23 @@
 class Meal:
-    title: str
-    meal_date: str
-    kind_of_meal: str
+    bldgType: int
+    langType: int
+    dateType: int
+    kindType: int
+    bldg: str
+    date: str
+    kind: str
     menu: str
-
+    
+    def __init__(self, bldgType, langType, dateType, kindType, 
+                 bldg, date, kind, menu) -> None:
+        self.bldgType = bldgType
+        self.langType = langType
+        self.dateType = dateType
+        self.kindType = kindType
+        self.bldg = bldg
+        self.date = date
+        self.kind = kind
+        self.menu = menu
 
 class MealWrapper:
     meal: Meal
@@ -11,20 +25,70 @@ class MealWrapper:
     def __init__(self) -> None:
         self.meal = Meal()
 
+# constant
+KOR = 0
+ENG = 1
 
-kind_of_meals = [["조식", "중식", "석식"], ["Breakfast", "Lunch", "Dinner"]]
+BLDG1_1ST = 0
+BLDG1_2ND = 1
+BLDG2_1ST = 2
 
-kind_of_restaurants = [
-    ["제1학생회관1층", "제1학생회관2층", "제2학생회관1층"],
-    [
-        "Student Union Bldg.1 1st floor",
-        "Student Union Bldg.1 2nd floor",
-        "Student Union Bldg.2 1st floor",
-    ],
-]
+BREAKFAST = 0
+LUNCH     = 1
+DINNER    = 2
 
-slot_endpoints = [(3, 13), (13, 23), (23, 30)]
-slot_filenames_postfix = [
-    ["_b_kor.json", "_l_kor.json", "_d_kor.json"],
-    ["_b_eng.json", "_l_eng.json", "_d_eng.json"],
-]
+DATE_LEN = 10
+DATE = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+
+# kind of meal
+MEAL_KIND_KOR = [ "조식",  #0
+                  "중식",  #1
+                  "석식" ] #2
+MEAL_KIND_ENG = [ "Breakfast",   #0
+                  "Lunch",       #1
+                  "Dinner"     ] #2
+
+# kind of building according to building type
+BLDG_KIND_KOR = [ "1학생회관 1층",  #0
+                  "1학생회관 2층",  #1
+                  "2학생회관 1층" ] #2
+BLDG_KIND_ENG = [ "Student Union Bldg.1 1st floor",  #0
+                  "Student Union Bldg.1 2nd floor",  #1
+                  "Student Union Bldg.2 1st floor" ] #2
+                  
+# excel column according to building type
+EXCEL_COL_BLDG0 = []                                                               #Bldg.1 1st
+EXCEL_COL_BLDG1 = []                                                               #Bldg.2 2nd
+EXCEL_COL_BLDG2 = ["A", "B", "C", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"] #Bldg.2 1st
+
+DATE_INDEX_BLDG0 = 0 #Bldg.1 1st
+DATE_INDEX_BLDG1 = 0 #Bldg.2 2nd
+DATE_INDEX_BLDG2 = 1 #Bldg.2 1st
+
+INDEX_ENDPOINTS_BLDG0 = []                            #Bldg.1 1st
+INDEX_ENDPOINTS_BLDG1 = []                            #Bldg.2 2nd
+INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 22], [22, 29]] #Bldg.2 1st
+
+# allergy type according to allergy code
+ALGY_ING_KOR = [ "계란류", "우유", "메밀", "땅콩", "대두", 
+                 "밀", "고등어", "게", "새우", "돼지고기", 
+                 "복숭아", "토마토", "아황산류", "호두", "닭고기",
+                 "쇠고기", "오징어", "조개류", "잣" ]
+ALGY_ING_ENG = [ "egg", "milk", "buckwheat", "peanut", "soybean", 
+                 "wheat", "mackerel", "crab", "shrimp", "pork", 
+                 "peach", "tomato", "sulgite", "walnut", "chicken", 
+                 "beef", "squid", "shellfish", "pine nut" ]
+
+# [langType]
+ALGY_ING       = [ALGY_ING_KOR, ALGY_ING_ENG]
+
+# [langType][kindType]
+MEAL_KIND      = [MEAL_KIND_KOR, MEAL_KIND_ENG]
+
+# [langType][bldgType]
+BLDG_KIND      = [BLDG_KIND_KOR, BLDG_KIND_ENG]
+
+# [bldgType]
+EXCEL_COL_BLDG  = [EXCEL_COL_BLDG0, EXCEL_COL_BLDG1, EXCEL_COL_BLDG2]
+DATE_INDEX      = [DATE_INDEX_BLDG0, DATE_INDEX_BLDG1, DATE_INDEX_BLDG2]
+INDEX_ENDPOINTS  = [INDEX_ENDPOINTS_BLDG0, INDEX_ENDPOINTS_BLDG1, INDEX_ENDPOINTS_BLDG2]
