@@ -7,9 +7,10 @@ class Meal:
     date: str
     kind: str
     menu: str
+    special: str
     
     def __init__(self, bldgType, langType, dateType, kindType, 
-                 bldg, date, kind, menu) -> None:
+                 bldg, date, kind, menu, special) -> None:
         self.bldgType = bldgType
         self.langType = langType
         self.dateType = dateType
@@ -18,6 +19,7 @@ class Meal:
         self.date = date
         self.kind = kind
         self.menu = menu
+        self.special = special
 
 class MealWrapper:
     meal: Meal
@@ -36,6 +38,7 @@ BLDG2_1ST = 2
 BREAKFAST = 0
 LUNCH     = 1
 DINNER    = 2
+SPECIAL   = 3
 
 DATE_LEN = 10
 DATE = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
@@ -65,9 +68,9 @@ DATE_INDEX_BLDG0 = 0 #Bldg.1 1st
 DATE_INDEX_BLDG1 = 0 #Bldg.2 2nd
 DATE_INDEX_BLDG2 = 1 #Bldg.2 1st
 
-INDEX_ENDPOINTS_BLDG0 = []                            #Bldg.1 1st
-INDEX_ENDPOINTS_BLDG1 = []                            #Bldg.2 2nd
-INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 22], [22, 29]] #Bldg.2 1st
+INDEX_ENDPOINTS_BLDG0 = []                                      #Bldg.1 1st
+INDEX_ENDPOINTS_BLDG1 = []                                      #Bldg.2 2nd
+INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 20], [22, 29], [20, 22]] #Bldg.2 1st
 
 # allergy type according to allergy code
 ALGY_ING_KOR = [ "계란류", "우유", "메밀", "땅콩", "대두", 

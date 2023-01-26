@@ -1,5 +1,6 @@
-|장소|KOR|ENG|
-|---|---|---|
-|1학생회관1층|0~9|10~19|
-|1학생회관2층|20~24|25~29|
-|2학생회관1층|30~50|51~71|
+1. To test the parsing code
+python parsing.py
+
+2. To apply the parsing result to server
+You need to specify the ip and port of backend server.
+python parsing.py http://ip:port/create
