@@ -1,53 +1,71 @@
-import datetime
+import sys
+import requests
 import json
-
-import openpyxl
-
-from meal import MealWrapper, kind_of_meals, slot_endpoints, slot_filenames_postfix
+import pandas as pd
+from meal import Meal
+from meal import KOR, ENG
+from meal import BREAKFAST, LUNCH, DINNER
+from meal import BLDG1_1ST, BLDG1_2ND, BLDG2_1ST 
+from meal import DATE_LEN, DATE
+from meal import MEAL_KIND
+from meal import BLDG_KIND
+from meal import EXCEL_COL_BLDG, INDEX_ENDPOINTS, DATE_INDEX
 from util import ComplexEncoder, sanitize_menu
+from util import parsing_date, parsing_meal 
 
-
-def parse_slot(sheet, eng: int, column_day: int, row_slot: int):
-    day = sheet.cell(row=2, column=column_day).value
-    menus = ""
-    for row_menus in range(slot_endpoints[row_slot][0], slot_endpoints[row_slot][1]):
-        menus += (
-            sanitize_menu((sheet.cell(row=row_menus, column=column_day).value)) + "\n"
-        )
-        if row_menus == 20:
-            if eng:
-                menus += "\n\\Corner\\\n"
-            else:
-                menus += "\n\\코너\\\n"
-
-    meal_wrapper = MealWrapper()
-    meal_wrapper.meal.title = (
-        "제2학생회관1층" if not eng else "Student Union Bldg.2 1st floor"
-    )
-    try:
-        meal_date = day.strftime("%Y-%m-%d")
-    except AttributeError:
-        meal_date = datetime(2022, int(day[0:2]), int(day[4:6]), 00, 00, 00)
-    meal_wrapper.meal.meal_date = meal_date
-    meal_wrapper.meal.kind_of_meal = kind_of_meals[eng][row_slot]
-    meal_wrapper.meal.menu = menus.rstrip("\n")
-    default_name = day.strftime("%m_%d") + slot_filenames_postfix[eng][row_slot]
-    jsonFile = open(f"./{default_name}", "w+", encoding="utf-8")
-    json.dump(
-        meal_wrapper.__dict__,
-        jsonFile,
-        indent=4,
-        ensure_ascii=False,
-        cls=ComplexEncoder,
-    )
-
-
+def parsing(excel_path: str, bldgType: int, langType: int) -> list:
+    col        = EXCEL_COL_BLDG [bldgType]
+    endpoint   = INDEX_ENDPOINTS[bldgType]
+    bldg       = BLDG_KIND      [langType][bldgType]
+    time_index = DATE_INDEX     [bldgType]
+    
+    sheet = pd.read_excel(excel_path, sheet_name=langType, 
+                          index_col=None, header=None, names=col, engine='openpyxl')
+    
+    parsing_result = []
+    for (dateType, date_str) in enumerate(DATE):
+        date_sheet = sheet[date_str]
+        date = parsing_date(time_index, date_sheet)
+        for kindType in [BREAKFAST, LUNCH, DINNER]:
+            kind = MEAL_KIND[langType][kindType]
+            menu, speical = parsing_meal[kindType](endpoint, date_sheet, langType, dateType)
+            meal = Meal(bldgType, langType, dateType, kindType, 
+                    bldg, date, kind, menu, speical)
+            parsing_result.append(meal.__dict__)        
+    
+    return parsing_result
+        
 if __name__ == "__main__":
-    file_path = "./2학생회관.xlsx"
-
-    workbook = openpyxl.load_workbook(file_path)
-
-    for lang in range(2):
-        for column_day in range(4, 11):
-            for row_slot in range(3):
-                parse_slot(workbook.worksheets[lang], lang, column_day, row_slot)
+    excel_path = "./2학생회관.xlsx"
+    parsing_result = []
+    
+    print("-------------------------------------------------")
+    print("parsing xlsx to json...")
+    parsing_result.extend(parsing(excel_path, BLDG2_1ST, KOR)) #2학 1층, 한글
+    parsing_result.extend(parsing(excel_path, BLDG2_1ST, ENG)) #2학 1층, 영어
+    print("-------------------------------------------------")
+    
+    if len(sys.argv) == 1:
+        # no url, save to local as json
+        print("-------------------------------------------------")
+        print("saving json...")
+        jsonFile = open("./2nd1floor_meal.json", "w", encoding="utf-8")
+        json.dump(parsing_result, jsonFile, indent=4,
+            ensure_ascii=False, cls=ComplexEncoder)
+        print("-------------------------------------------------")
+    elif len(sys.argv) == 2:
+        # post to server
+        url = sys.argv[1]
+        print("-------------------------------------------------")
+        print("send to server...")
+        if url[0:4] != "http":
+            url = "http://localhost:8080/meals/test"
+            requests.post(url, data={"testStr": "Hello World!"})
+        else:
+            for meal_result in parsing_result:
+                print(meal_result)
+                response = requests.post(url, json=meal_result)
+                print(response)
+                print()
+        print("-------------------------------------------------")
+    None
