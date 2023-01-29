@@ -55,7 +55,7 @@ def add_allergy(menu: str, langType: int) -> str:
         algy += (algy_ing[algy_num - 1] + ", ") if algy_num < len(list(algy_ing)) else ""  
     
     algy = algy[:-2] if len(algy) > 2 else algy    
-    algy = "({})".format(algy) if len(algy) > 0 else ""
+    algy = "[{}]".format(algy) if len(algy) > 0 else ""
     return algy
 
 def sanitize_menu(menu: str):
