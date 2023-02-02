@@ -1,4 +1,5 @@
 import sys
+import os
 import requests
 import json
 import pandas as pd
@@ -34,38 +35,55 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
             parsing_result.append(meal.__dict__)        
     
     return parsing_result
-        
-if __name__ == "__main__":
-    excel_path = "./2학생회관.xlsx"
+
+def parsingTest():
+    excel_dir_path = "./excel"
     parsing_result = []
-    
     print("-------------------------------------------------")
     print("parsing xlsx to json...")
-    parsing_result.extend(parsing(excel_path, BLDG2_1ST, KOR)) #2학 1층, 한글
-    parsing_result.extend(parsing(excel_path, BLDG2_1ST, ENG)) #2학 1층, 영어
+    for excel_filename in os.listdir(excel_dir_path):
+        excel_path = os.path.join(excel_dir_path, excel_filename)
+        parsing_result.extend(parsing(excel_path, BLDG2_1ST, KOR)) #2학 1층, 한글
+        parsing_result.extend(parsing(excel_path, BLDG2_1ST, ENG)) #2학 1층, 영어
     print("-------------------------------------------------")
+    print("saving json...")
+    jsonFile = open("./2nd1floor_meal.json", "w", encoding="utf-8")
+    json.dump(parsing_result, jsonFile, indent=4,
+        ensure_ascii=False, cls=ComplexEncoder)
+    print("-------------------------------------------------")    
     
-    if len(sys.argv) == 1:
-        # no url, save to local as json
+if __name__ == "__main__":
+    Mode = 0
+    if Mode == 0:
+        excel_path = "./2학생회관.xlsx"
+        parsing_result = []
         print("-------------------------------------------------")
-        print("saving json...")
-        jsonFile = open("./2nd1floor_meal.json", "w", encoding="utf-8")
-        json.dump(parsing_result, jsonFile, indent=4,
-            ensure_ascii=False, cls=ComplexEncoder)
+        print("parsing xlsx to json...")
+        parsing_result.extend(parsing(excel_path, BLDG2_1ST, KOR)) #2학 1층, 한글
+        parsing_result.extend(parsing(excel_path, BLDG2_1ST, ENG)) #2학 1층, 영어
         print("-------------------------------------------------")
-    elif len(sys.argv) == 2:
-        # post to server
-        url = sys.argv[1]
-        print("-------------------------------------------------")
-        print("send to server...")
-        if url[0:4] != "http":
-            url = "http://localhost:8080/meals/test"
-            requests.post(url, data={"testStr": "Hello World!"})
-        else:
-            for meal_result in parsing_result:
-                print(meal_result)
-                response = requests.post(url, json=meal_result)
-                print(response)
-                print()
-        print("-------------------------------------------------")
-    None
+        if len(sys.argv) == 1:
+            # no url, save to local as json
+            print("-------------------------------------------------")
+            print("saving json...")
+            jsonFile = open("./2nd1floor_meal.json", "w", encoding="utf-8")
+            json.dump(parsing_result, jsonFile, indent=4,
+                ensure_ascii=False, cls=ComplexEncoder)
+            print("-------------------------------------------------")
+        elif len(sys.argv) == 2:
+            # post to server
+            url = sys.argv[1]
+            print("-------------------------------------------------")
+            print("send to server...")
+            if url[0:4] != "http":
+                url = "http://localhost:8080/meals/test"
+                requests.post(url, data={"testStr": "Hello World!"})
+            else:
+                for meal_result in parsing_result:
+                    print(meal_result)
+                    response = requests.post(url, json=meal_result)
+                    print(response)
+                    print()
+            print("-------------------------------------------------")
+    elif Mode == 1:
+        parsingTest()

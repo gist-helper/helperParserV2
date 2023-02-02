@@ -14,7 +14,8 @@ def parsing_menu(row_range: list, data_sheet: list, langType: int):
     for i in range(row_range[0], row_range[1]):
         algy = add_allergy(data_sheet[i], langType)
         menu_oneline = sanitize_menu(data_sheet[i])
-        menu += menu_oneline + algy + "\n"
+        menu += menu_oneline + algy
+        menu += "\n" if len(menu_oneline) > 0 else "";
     return menu
 
 def parsing_breakfast(endpoint: list, data_sheet: list, langType: int, dateType: int):
