@@ -74,17 +74,25 @@ INDEX_ENDPOINTS_BLDG1 = []                                      #Bldg.2 2nd
 INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 20], [22, 29], [20, 22]] #Bldg.2 1st
 
 # allergy type according to allergy code
-ALGY_ING_KOR = [ "계란류", "우유", "메밀", "땅콩", "대두", 
+ALGY_1_ING_KOR = ["난류", "우유", "메밀", "대두", "땅콩", "밀", 
+                "새우", "돼지고기", "닭고기", "쇠고기", "오징어", 
+                "고등어", "조개류", "토마토", "아황산염"]
+ALGY_1_ING_ENG = ["egg", ",milk" , "buckwheat", "soybean", "peanut","wheat",
+                "shrimp", "pork", "chicken", "beef", "squid", 
+                "mackerel", "shellfish", "tomato", "sulgite"]
+ALGY_2_ING_KOR = [ "계란류", "우유", "메밀", "땅콩", "대두", 
                  "밀", "고등어", "게", "새우", "돼지고기", 
                  "복숭아", "토마토", "아황산류", "호두", "닭고기",
                  "쇠고기", "오징어", "조개류", "잣" ]
-ALGY_ING_ENG = [ "egg", "milk", "buckwheat", "peanut", "soybean", 
+ALGY_2_ING_ENG = [ "egg", "milk", "buckwheat", "peanut", "soybean", 
                  "wheat", "mackerel", "crab", "shrimp", "pork", 
                  "peach", "tomato", "sulgite", "walnut", "chicken", 
                  "beef", "squid", "shellfish", "pine nut" ]
 
 # [langType]
-ALGY_ING       = [ALGY_ING_KOR, ALGY_ING_ENG]
+ALGY_ING_1       = [ALGY_1_ING_KOR, ALGY_1_ING_ENG]
+ALGY_ING_2       = [ALGY_2_ING_KOR, ALGY_2_ING_ENG]
+
 
 # [langType][kindType]
 MEAL_KIND      = [MEAL_KIND_KOR, MEAL_KIND_ENG]

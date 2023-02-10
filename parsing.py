@@ -1,5 +1,6 @@
 import sys
 import os
+from os.path import exists 
 import requests
 import json
 import pandas as pd
@@ -29,9 +30,9 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
             date = parsing_date(time_index, date_sheet)
             for kindType in [BREAKFAST, LUNCH, DINNER]:
                 kind = MEAL_KIND[langType][kindType]
-                menu, speical = parsing_meal[kindType](endpoint, date_sheet, langType, dateType)
+                menu, special = parsing_meal[kindType](endpoint, date_sheet, langType, dateType, bldgType)
                 meal = Meal(bldgType, langType, dateType, kindType, 
-                        bldg, date, kind, menu, speical)
+                        bldg, date, kind, menu, special)
                 parsing_result.append(meal.__dict__)        
 
         return parsing_result
@@ -43,9 +44,9 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
             date = parsing_date(time_index, date_sheet)
             for kindType in [BREAKFAST, LUNCH, DINNER]:
                 kind = MEAL_KIND[langType][kindType]
-                menu, speical = parsing_meal[kindType](endpoint, date_sheet, langType, dateType)
+                menu, special = parsing_meal[kindType](endpoint, date_sheet, langType, dateType, bldgType)
                 meal = Meal(bldgType, langType, dateType, kindType, 
-                        bldg, date, kind, menu, speical)
+                        bldg, date, kind, menu, special)
                 parsing_result.append(meal.__dict__) 
         return parsing_result
            
@@ -69,39 +70,46 @@ def parsingTest():
 if __name__ == "__main__":
     Mode = 0
     if Mode == 0:
-        excel_path = "./2학생회관.xlsx"
-        parsing_result = []
+        excel_path_1 = "./1학생회관.xlsx"
+        excel_path_2 = "./2학생회관.xlsx"
+        parsing_result_1 = []
+        parsing_result_2 = []
         print("-------------------------------------------------")
         print("parsing xlsx to json...")
-        if excel_path == "./2학생회관.xlsx":
-            parsing_result.extend(parsing(excel_path, BLDG2_1ST, KOR)) #2학 1층, 한글
-            parsing_result.extend(parsing(excel_path, BLDG2_1ST, ENG)) #2학 1층, 영어
-        elif excel_path ==  "./1학생회관.xlsx":
-            parsing_result.extend(parsing(excel_path, BLDG1_1ST, KOR)) #1학 1층, 한글
+        if exists(excel_path_1):
+            parsing_result_1.extend(parsing(excel_path_1, BLDG1_1ST, KOR)) #1학 1층, 한글
             #parsing_result.extend(parsing(excel_path, BLDG1_1ST, ENG)) #1학 1층, 영어
+        if exists(excel_path_2):
+            parsing_result_2.extend(parsing(excel_path_2, BLDG2_1ST, KOR)) #2학 1층, 한글
+            parsing_result_2.extend(parsing(excel_path_2, BLDG2_1ST, ENG)) #2학 1층, 영어
         print("-------------------------------------------------")
         if len(sys.argv) == 1:
             # no url, save to local as json
             print("-------------------------------------------------")
             print("saving json...")
-            jsonFile = open("./2nd1floor_meal.json", "w", encoding="utf-8")
-            json.dump(parsing_result, jsonFile, indent=4,
-                ensure_ascii=False, cls=ComplexEncoder)
+            if exists(excel_path_1):
+                jsonFile = open("./1nd1floor_meal.json", "w", encoding="utf-8")
+                json.dump(parsing_result_1, jsonFile, indent=4,
+                    ensure_ascii=False, cls=ComplexEncoder)        
+            if exists(excel_path_2):
+                jsonFile = open("./2nd1floor_meal.json", "w", encoding="utf-8")
+                json.dump(parsing_result_2, jsonFile, indent=4,
+                    ensure_ascii=False, cls=ComplexEncoder)
             print("-------------------------------------------------")
-    elif len(sys.argv) == 2:
-        # post to server
-        url = sys.argv[1]
-        print("-------------------------------------------------")
-        print("send to server...")
-        if url[0:4] != "http":
-            url = "http://localhost:8080/meals/test"
-            requests.post(url, data={"testStr": "Hello World!"})
-        else:
-            for meal_result in parsing_result:
-                print(meal_result)
-                response = requests.post(url, json=meal_result)
-                print(response)
-                print()
-        print("-------------------------------------------------")
+        elif len(sys.argv) == 2:
+            # post to server
+            url = sys.argv[1]
+            print("-------------------------------------------------")
+            print("send to server...")
+            if url[0:4] != "http":
+                url = "http://localhost:8080/meals/test"
+                requests.post(url, data={"testStr": "Hello World!"})
+            else:
+                for meal_result in parsing_result_1, parsing_result_2:
+                    print(meal_result)
+                    response = requests.post(url, json=meal_result)
+                    print(response)
+                    print()
+            print("-------------------------------------------------")
     elif Mode == 1:
         parsingTest()
