@@ -41,7 +41,8 @@ DINNER    = 2
 SPECIAL   = 3
 
 DATE_LEN = 10
-DATE = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+DATE_1st = ["Mon", "Tue", "Wed", "Thr", "Fri"] #1학 요일
+DATE_2nd = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"] #2학 요일
 
 # kind of meal
 MEAL_KIND_KOR = [ "조식",  #0
@@ -60,15 +61,15 @@ BLDG_KIND_ENG = [ "Student Union Bldg.1 1st floor",  #0
                   "Student Union Bldg.2 1st floor" ] #2
                   
 # excel column according to building type
-EXCEL_COL_BLDG0 = []                                                               #Bldg.1 1st
+EXCEL_COL_BLDG0 = ["A", "B","Mon" ,"Mon" , "Tue", "Tue","Wed","Wed","Thr","Thr","Fri","Fri"]#Bldg.1 1st
 EXCEL_COL_BLDG1 = []                                                               #Bldg.2 2nd
 EXCEL_COL_BLDG2 = ["A", "B", "C", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"] #Bldg.2 1st
 
-DATE_INDEX_BLDG0 = 0 #Bldg.1 1st
+DATE_INDEX_BLDG0 = 4 #Bldg.1 1st
 DATE_INDEX_BLDG1 = 0 #Bldg.2 2nd
 DATE_INDEX_BLDG2 = 1 #Bldg.2 1st
 
-INDEX_ENDPOINTS_BLDG0 = []                                      #Bldg.1 1st
+INDEX_ENDPOINTS_BLDG0 = [[5,15],[15,22],[23,30],[22,23]] #Bldg.1 1st
 INDEX_ENDPOINTS_BLDG1 = []                                      #Bldg.2 2nd
 INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 20], [22, 29], [20, 22]] #Bldg.2 1st
 
