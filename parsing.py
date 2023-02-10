@@ -88,20 +88,20 @@ if __name__ == "__main__":
             json.dump(parsing_result, jsonFile, indent=4,
                 ensure_ascii=False, cls=ComplexEncoder)
             print("-------------------------------------------------")
-       # elif len(sys.argv) == 2:
-       #     # post to server
-       #     url = sys.argv[1]
-       #     print("-------------------------------------------------")
-       #     print("send to server...")
-       #     if url[0:4] != "http":
-       #         url = "http://localhost:8080/meals/test"
-       #         requests.post(url, data={"testStr": "Hello World!"})
-       #     else:
-       #         for meal_result in parsing_result:
-       #             print(meal_result)
-       #             response = requests.post(url, json=meal_result)
-       #             print(response)
-       #             print()
-       #     print("-------------------------------------------------")
+    elif len(sys.argv) == 2:
+        # post to server
+        url = sys.argv[1]
+        print("-------------------------------------------------")
+        print("send to server...")
+        if url[0:4] != "http":
+            url = "http://localhost:8080/meals/test"
+            requests.post(url, data={"testStr": "Hello World!"})
+        else:
+            for meal_result in parsing_result:
+                print(meal_result)
+                response = requests.post(url, json=meal_result)
+                print(response)
+                print()
+        print("-------------------------------------------------")
     elif Mode == 1:
         parsingTest()
