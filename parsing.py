@@ -25,6 +25,11 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
                           index_col=None, header=None, names=col, engine='openpyxl')
     parsing_result = []
     if bldgType == 0: #1학
+        xl = pd.read_excel(excel_path, sheet_name=None,
+                           index_col=None, header=None, names=col, engine='openpyxl')
+        last_sheet = list(xl.keys())[-2]
+        sheet = xl[last_sheet]
+
         for (dateType, date_str) in enumerate(DATE_1st):
             date_sheet = sheet[date_str]
             date = parsing_date(time_index, date_sheet)
@@ -36,7 +41,6 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
                 parsing_result.append(meal.__dict__)        
 
         return parsing_result
-
 
     elif bldgType == 2: #2학
         for (dateType, date_str) in enumerate(DATE_2nd):
@@ -105,7 +109,12 @@ if __name__ == "__main__":
                 url = "http://localhost:8080/meals/test"
                 requests.post(url, data={"testStr": "Hello World!"})
             else:
-                for meal_result in parsing_result_1, parsing_result_2:
+                for meal_result in parsing_result_1:
+                    print(meal_result)
+                    response = requests.post(url, json=meal_result)
+                    print(response)
+                    print()
+                for meal_result in parsing_result_2:
                     print(meal_result)
                     response = requests.post(url, json=meal_result)
                     print(response)
