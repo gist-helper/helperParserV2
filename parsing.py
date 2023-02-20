@@ -85,6 +85,18 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
                             bldg, date, kind, menu, special)
                 parsing_result.append(meal.__dict__)
         return parsing_result
+    
+
+    if bldgType == 0 & langType == 1: #1학 영어 엑셀
+        for (dateType, date_str) in enumerate(DATE_1st):
+            date_sheet = sheet[date_str]
+            date = parsing_date(time_index, date_sheet)
+            for kindType in [BREAKFAST, LUNCH, DINNER]:
+                kind = MEAL_KIND[langType][kindType]
+                menu, special = parsing_meal[kindType](endpoint, date_sheet, langType, dateType, bldgType)
+                meal = Meal(bldgType, langType, dateType, kindType, 
+                        bldg, date, kind, menu, special)
+                parsing_result.append(meal.__dict__) 
 
     # 2학
     elif bldgType == BLDG2_1ST:
@@ -154,6 +166,7 @@ if __name__ == "__main__":
             # no url, save to local as json
             print("-------------------------------------------------")
             print("saving json...")
+
             jsonFile = open("./meal.json", "w", encoding="utf-8")
             json.dump(parsing_result, jsonFile, indent=4,
                       ensure_ascii=False, cls=ComplexEncoder)
