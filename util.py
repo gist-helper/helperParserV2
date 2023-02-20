@@ -28,8 +28,10 @@ def parsing_lunch(endpoint: list, data_sheet: list, langType: int, dateType: int
     row_range = endpoint[LUNCH]
     menu = parsing_menu(row_range, data_sheet, langType, bldgType)
     special =""
-    if bldgType == 0 & langType ==0 : #1학 고정메뉴
-     special ="돈까스정식(수제돈까스* 스프*모닝빵*후식음료*샐러드*단무지*배추김치) [돼지고기]\n"
+    if bldgType == 0 and langType == 0 : #1학 고정메뉴
+        special = "돈까스정식 (수제돈까스*스프*모닝빵*후식음료*샐러드*단무지*배추김치) [돼지고기]\n"
+    elif bldgType == 0 and langType == 1: #1학 고정메뉴 eng
+        special = "homemade pork cutlet (cutlet*soup*bread*juice*salad) [pork]\n"
     elif bldgType == 2: #2학 스페셜메뉴
         row_range = endpoint[SPECIAL]
         special = parsing_menu(row_range, data_sheet, langType, bldgType)       
