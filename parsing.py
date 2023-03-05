@@ -8,7 +8,6 @@ from meal import Meal, INDEX_ENDPOINTS_BLDG1_EXCEPT
 from meal import KOR, ENG
 from meal import BREAKFAST, LUNCH, DINNER
 from meal import BLDG1_1ST, BLDG1_2ND, BLDG2_1ST
-from meal import DATE_LEN, DATE_2nd,DATE_1st
 from meal import MEAL_KIND
 from meal import BLDG_KIND
 from meal import EXCEL_COL_BLDG, INDEX_ENDPOINTS, DATE_INDEX
@@ -85,18 +84,6 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
                             bldg, date, kind, menu, special)
                 parsing_result.append(meal.__dict__)
         return parsing_result
-    
-
-    if bldgType == 0 & langType == 1: #1학 영어 엑셀
-        for (dateType, date_str) in enumerate(DATE_1st):
-            date_sheet = sheet[date_str]
-            date = parsing_date(time_index, date_sheet)
-            for kindType in [BREAKFAST, LUNCH, DINNER]:
-                kind = MEAL_KIND[langType][kindType]
-                menu, special = parsing_meal[kindType](endpoint, date_sheet, langType, dateType, bldgType)
-                meal = Meal(bldgType, langType, dateType, kindType, 
-                        bldg, date, kind, menu, special)
-                parsing_result.append(meal.__dict__) 
 
     # 2학
     elif bldgType == BLDG2_1ST:
@@ -147,18 +134,17 @@ if __name__ == "__main__":
         print("-------------------------------------------------")
         print("parsing xlsx to json...")
 
-        if exists(filepath_bldg1_1_kor) and exists(filepath_bldg1_1_eng):
+        if exists(filepath_bldg1_1_kor):
             parsing_result.extend(parsing(filepath_bldg1_1_kor, BLDG1_1ST, KOR)) #1학 1층, 한글
+        if exists(filepath_bldg1_1_eng):
             parsing_result.extend(parsing(filepath_bldg1_1_eng, BLDG1_1ST, ENG)) #1학 1층, 영어
-            None
-        if exists(filepath_bldg1_2_kor) and exists(filepath_bldg1_2_eng):
+        if exists(filepath_bldg1_2_kor):
             parsing_result.extend(parsing(filepath_bldg1_2_kor, BLDG1_2ND, KOR)) #1학 2층, 한글
+        if exists(filepath_bldg1_2_eng):
             parsing_result.extend(parsing(filepath_bldg1_2_eng, BLDG1_2ND, ENG)) #1학 2층, 영어
-            None
         if exists(filepath_bldg2):
             parsing_result.extend(parsing(filepath_bldg2, BLDG2_1ST, KOR)) #2학 1층, 한글
             parsing_result.extend(parsing(filepath_bldg2, BLDG2_1ST, ENG)) #2학 1층, 영어
-            None
 
         print("-------------------------------------------------")
 
