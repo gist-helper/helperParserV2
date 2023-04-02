@@ -79,14 +79,20 @@ DATE_INDEX_BLDG0 = 4  # Bldg.1 1st
 DATE_INDEX_BLDG1 = 1  # Bldg.1 2nd
 DATE_INDEX_BLDG2 = 1  # Bldg.2 1st
 
-INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
+# INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
+# 2023.03.27 식단부터 조식에 '즉석라면코너' 신설됨
+INDEX_ENDPOINTS_BLDG0 = [[5, 15], [16, 23], [24, 31], [23, 24]]  # Bldg.1 1st
 INDEX_ENDPOINTS_BLDG1 = [[0, 0], [2, 12], [0, 0], [0, 0]]        # Bldg.1 2nd
 INDEX_ENDPOINTS_BLDG1_EXCEPT = [4, 6] # 1학2층 엑셀은 숨겨진 행(5,7번) 존재하고 dummy 들어가있어 제외해야함.
 # INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 20], [22, 29], [20, 22]]  # Bldg.2 1st
 # 2023.03.06 식단부터 조식 메뉴 1개 줄었음.
 # INDEX_ENDPOINTS_BLDG2 = [[2, 11], [11, 18], [20, 27], [18, 20]]  # Bldg.2 1st
 # 2023.03.13 식단부터 조식은 되돌아오고, 중식 메뉴 1개 줄었음.
-INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 19], [21, 28], [19, 21]]  # Bldg.2 1st
+# INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 19], [21, 28], [19, 21]]  # Bldg.2 1st
+# 2023.03.20 식단의 메뉴 바뀜.
+INDEX_ENDPOINTS_BLDG2 = [[2, 11], [11, 18], [20, 27], [18, 20]]  # Bldg.2 1st
+
+
 # allergy type according to allergy code
 ALGY_1_ING_KOR = ["난류", "우유", "메밀", "대두", "땅콩", "밀",
                   "새우", "돼지고기", "닭고기", "쇠고기", "오징어",
