@@ -81,7 +81,9 @@ DATE_INDEX_BLDG2 = 1  # Bldg.2 1st
 
 # INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
 # 2023.03.27 식단부터 조식에 '즉석라면코너' 신설됨
-INDEX_ENDPOINTS_BLDG0 = [[5, 15], [16, 23], [24, 31], [23, 24]]  # Bldg.1 1st
+# INDEX_ENDPOINTS_BLDG0 = [[5, 15], [16, 23], [24, 31], [23, 24]]  # Bldg.1 1st
+# 2023.05.06 조식 '즉석라면코너' 삭제됨
+INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
 INDEX_ENDPOINTS_BLDG1 = [[0, 0], [2, 12], [0, 0], [0, 0]]        # Bldg.1 2nd
 INDEX_ENDPOINTS_BLDG1_EXCEPT = [4, 6] # 1학2층 엑셀은 숨겨진 행(5,7번) 존재하고 dummy 들어가있어 제외해야함.
 # INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 20], [22, 29], [20, 22]]  # Bldg.2 1st
