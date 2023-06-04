@@ -31,7 +31,7 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
                            index_col=None, header=None, names=None, engine='openpyxl')
 
         # 맨 뒤에서 2번째 sheet가 이번주 sheet
-        last_sheet = list(xl.keys())[-2]
+        last_sheet = list(xl.keys())[-1]
         sheet = xl[last_sheet]
 
         # 짝수 column만 사용
