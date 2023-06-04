@@ -28,11 +28,11 @@ def parsing_breakfast(endpoint: list, data_sheet: list, langType: int, dateType:
     row_range = endpoint[BREAKFAST]
     menu = parsing_menu(row_range, data_sheet, langType, bldgType)
     special = ""
-    # if bldgType == 0:
-    #     if langType == 0:
-    #         special = "셀프 즉석라면코너(라면*계란*흰밥*김치*시리얼*우유*토스트*야채샐러드)\n"
-    #     else:
-    #         special += "self ramen corner(ramen*egg*rice*kimchi* salad*toast*serial)\n"
+    if bldgType == 0:
+        if langType == 0:
+            special = "셀프 즉석라면코너(라면*계란*흰밥*김치*시리얼*우유*토스트*야채샐러드)\n"
+        else:
+            special += "self ramen corner(ramen*egg*rice*kimchi* salad*toast*serial)\n"
     return menu, special
 
 
