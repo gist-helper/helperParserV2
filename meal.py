@@ -70,18 +70,18 @@ BLDG_KIND_ENG = ["Student Union Bldg.1 1st floor",  # 0
 column 예외 존재 (2023.2.6의 1학1층한글 엑셀보면 쓸모없는 col이 있을 수 있음)
 이를 위해 요일 있는 행의 index로 접근
 '''
-EXCEL_COL_BLDG0 = [2, 11]
+EXCEL_COL_BLDG0 = [2, 7]
 EXCEL_COL_BLDG0_EXCEPT = []
 EXCEL_COL_BLDG1 = [1, 6]
 EXCEL_COL_BLDG2 = [3, 10]
 
-DATE_INDEX_BLDG0 = 4  # Bldg.1 1st
+DATE_INDEX_BLDG0 = 5  # Bldg.1 1st
 DATE_INDEX_BLDG1 = 1  # Bldg.1 2nd
 DATE_INDEX_BLDG2 = 1  # Bldg.2 1st
 
 # INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
-# 2023.03.27 식단부터 조식에 '즉석라면코너' 신설됨
-INDEX_ENDPOINTS_BLDG0 = [[5, 15], [16, 23], [24, 31], [23, 24]]  # Bldg.1 1st
+# 2023.03.27 식단부터 조식에 '즉석라면코너' 신설됨 -> constant로 관리. 따로 파싱 row 안만듦.
+INDEX_ENDPOINTS_BLDG0 = [[6, 16], [17, 25], [26, 33], [25, 26]]  # Bldg.1 1st
 # 2023.05.06 조식 '즉석라면코너' 삭제됨
 # INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
 INDEX_ENDPOINTS_BLDG1 = [[0, 0], [2, 12], [0, 0], [0, 0]]        # Bldg.1 2nd

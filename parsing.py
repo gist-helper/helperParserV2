@@ -36,7 +36,7 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
 
         # 짝수 column만 사용
         sheet_keys = sheet.keys()[start_col_idx : end_col_idx]
-        sheet_keys = sheet_keys[0::2]
+        # sheet_keys = sheet_keys[0::2]
 
         for (dateType, date_str) in enumerate(sheet_keys):
             date_sheet = sheet[date_str]
