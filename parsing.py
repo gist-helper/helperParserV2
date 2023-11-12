@@ -31,12 +31,12 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
                            index_col=None, header=None, names=None, engine='openpyxl')
 
         # 맨 뒤에서 2번째 sheet가 이번주 sheet
-        last_sheet = list(xl.keys())[-2]
+        last_sheet = list(xl.keys())[-1]
         sheet = xl[last_sheet]
 
         # 짝수 column만 사용
         sheet_keys = sheet.keys()[start_col_idx : end_col_idx]
-        sheet_keys = sheet_keys[0::2]
+        # sheet_keys = sheet_keys[0::2]
 
         for (dateType, date_str) in enumerate(sheet_keys):
             date_sheet = sheet[date_str]
@@ -51,8 +51,12 @@ def parsing(excel_path: str, bldgType: int, langType: int) -> list:
 
     # 1학 1층 영어
     elif bldgType == BLDG1_1ST and langType == 1:
-        sheet = pd.read_excel(excel_path, sheet_name=0,
+        xl = pd.read_excel(excel_path, sheet_name=None,
                               index_col=None, header=None, names=None, engine='openpyxl')
+
+        # 맨 뒤에서 2번째 sheet가 이번주 sheet
+        last_sheet = list(xl.keys())[-1]
+        sheet = xl[last_sheet]
 
         # 짝수 column만 사용
         sheet_keys = sheet.keys()[start_col_idx: end_col_idx]
