@@ -89,6 +89,9 @@ def sanitize_menu(menu: str):
         return ""
     if type(menu) != str:
         return ""
+    if "---" in menu:
+        # dummy data in Bldg.2 (2023.11.25)
+        return ""
     return menu.rstrip("0123456789. ")
 
 

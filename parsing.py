@@ -148,7 +148,7 @@ if __name__ == "__main__":
             parsing_result.extend(parsing(filepath_bldg1_2_eng, BLDG1_2ND, ENG)) #1학 2층, 영어
         if exists(filepath_bldg2):
             parsing_result.extend(parsing(filepath_bldg2, BLDG2_1ST, KOR)) #2학 1층, 한글
-            parsing_result.extend(parsing(filepath_bldg2, BLDG2_1ST, ENG)) #2학 1층, 영어
+            # parsing_result.extend(parsing(filepath_bldg2, BLDG2_1ST, ENG)) #2학 1층, 영어
 
         print("-------------------------------------------------")
 

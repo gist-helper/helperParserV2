@@ -77,7 +77,7 @@ EXCEL_COL_BLDG2 = [3, 10]
 
 DATE_INDEX_BLDG0 = 5  # Bldg.1 1st
 DATE_INDEX_BLDG1 = 1  # Bldg.1 2nd
-DATE_INDEX_BLDG2 = 1  # Bldg.2 1st
+DATE_INDEX_BLDG2 = 5  # Bldg.2 1st
 
 # INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
 # 2023.03.27 식단부터 조식에 '즉석라면코너' 신설됨 -> constant로 관리. 따로 파싱 row 안만듦.
@@ -92,7 +92,9 @@ INDEX_ENDPOINTS_BLDG1_EXCEPT = [4, 6] # 1학2층 엑셀은 숨겨진 행(5,7번)
 # 2023.03.13 식단부터 조식은 되돌아오고, 중식 메뉴 1개 줄었음.
 # INDEX_ENDPOINTS_BLDG2 = [[2, 12], [12, 19], [21, 28], [19, 21]]  # Bldg.2 1st
 # 2023.03.20 식단의 메뉴 바뀜.
-INDEX_ENDPOINTS_BLDG2 = [[2, 11], [11, 18], [20, 27], [18, 20]]  # Bldg.2 1st
+# INDEX_ENDPOINTS_BLDG2 = [[2, 11], [11, 18], [20, 27], [18, 20]]  # Bldg.2 1st
+# 2023.11.25 2학 영양사님 바뀌셔서 양식 바뀜
+INDEX_ENDPOINTS_BLDG2 = [[6, 15], [17, 24], [24, 31], [15, 17]]  # Bldg.2 1st
 
 
 # allergy type according to allergy code
