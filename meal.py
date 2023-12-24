@@ -81,7 +81,10 @@ DATE_INDEX_BLDG2 = 5  # Bldg.2 1st
 
 # INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
 # 2023.03.27 식단부터 조식에 '즉석라면코너' 신설됨 -> constant로 관리. 따로 파싱 row 안만듦.
-INDEX_ENDPOINTS_BLDG0 = [[6, 16], [17, 25], [26, 33], [25, 26]]  # Bldg.1 1st
+# INDEX_ENDPOINTS_BLDG0 = [[6, 16], [17, 25], [26, 33], [25, 26]]  # Bldg.1 1st
+# 2023.12.24 dinner 메뉴 하나 줄음
+INDEX_ENDPOINTS_BLDG0 = [[6, 16], [17, 25], [26, 32], [25, 26]]  # Bldg.1 1st
+
 # 2023.05.06 조식 '즉석라면코너' 삭제됨
 # INDEX_ENDPOINTS_BLDG0 = [[5, 15], [15, 22], [23, 30], [22, 23]]  # Bldg.1 1st
 INDEX_ENDPOINTS_BLDG1 = [[0, 0], [2, 12], [0, 0], [0, 0]]        # Bldg.1 2nd
