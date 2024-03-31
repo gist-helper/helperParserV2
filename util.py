@@ -8,6 +8,8 @@ from meal import ALGY_ING_1, ALGY_ING_2
 
 def parsing_date(time_index: int, data_sheet: list):
     date = str(data_sheet[time_index])
+    if '.' in date:
+        date = date.replace('.', '-')
     return date[:DATE_LEN] if len(date) > DATE_LEN else date
 
 
